@@ -1,66 +1,129 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    /* ===== AUTO MESSAGE CONTACT ===== */
     const messageField = document.querySelector('textarea[name="message"]');
 
     document.querySelectorAll('.btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const type = btn.dataset.type;
-            if (type && messageField) {
-                messageField.value = `Bonjour,\nJe souhaite une demande de ${type}.`;
+            if (btn.dataset.type && messageField) {
+                messageField.value = `Bonjour,\nJe souhaite une ${btn.dataset.type}.`;
             }
         });
     });
+
+    /* ===== SLIDER ===== */
+    const slides = document.querySelector(".slides");
+    const slide = document.querySelectorAll(".slide");
+    const prev = document.querySelector(".prev");
+    const next = document.querySelector(".next");
+    const dotsContainer = document.querySelector(".dots");
+
+    let index = 0;
+
+    slide.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.className = "dot";
+        if (i === 0) dot.classList.add("active");
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll(".dot");
+
+    function updateSlider() {
+        slides.style.transform = `translateX(${-index * 100}%)`;
+        dots.forEach(d => d.classList.remove("active"));
+        dots[index].classList.add("active");
+    }
+
+    function goToSlide(i) {
+        index = i;
+        updateSlider();
+    }
+
+    next.onclick = () => {
+        index = (index + 1) % slide.length;
+        updateSlider();
+    };
+
+    prev.onclick = () => {
+        index = (index - 1 + slide.length) % slide.length;
+        updateSlider();
+    };
+
+    /* ===== LIGHTBOX ===== */
+    const images = document.querySelectorAll(
+        ".apercu img, .slide img, .galerie img"
+    );
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const caption = document.getElementById("caption");
+    const close = document.querySelector(".close");
+
+    images.forEach(img => {
+        img.addEventListener("click", () => {
+            lightbox.style.display = "flex";
+            lightboxImg.src = img.src;
+            caption.textContent = img.alt;
+        });
+    });
+
+    close.onclick = () => lightbox.style.display = "none";
+
+    lightbox.onclick = e => {
+        if (e.target === lightbox) {
+            lightbox.style.display = "none";
+        }
+    };
 });
 
-const slides = document.querySelector(".slides");
-const slide = document.querySelectorAll(".slide");
-const prev = document.querySelector(".prev");
-const next = document.querySelector(".next");
-const dotsContainer = document.querySelector(".dots");
 
-let index = 0;
-let startX = 0;
+document.addEventListener("DOMContentLoaded", () => {
 
-/* Créer les dots */
-slide.forEach((_, i) => {
-    const dot = document.createElement("span");
-    dot.classList.add("dot");
-    if (i === 0) dot.classList.add("active");
-    dot.addEventListener("click", () => goToSlide(i));
-    dotsContainer.appendChild(dot);
-});
+    document.querySelectorAll(".photo-card").forEach(card => {
+        const photoId = card.dataset.id;
 
-const dots = document.querySelectorAll(".dot");
+        const likeBtn = card.querySelector(".like-btn");
+        const likeCount = card.querySelector(".like-count");
 
-function updateSlider() {
-    slides.style.transform = `translateX(${-index * 100}%)`;
-    dots.forEach(d => d.classList.remove("active"));
-    dots[index].classList.add("active");
-}
+        const commentInput = card.querySelector(".comment-input");
+        const commentBtn = card.querySelector(".comment-btn");
+        const commentList = card.querySelector(".comment-list");
 
-function goToSlide(i) {
-    index = i;
-    updateSlider();
-}
+        /* ===== LIKES ===== */
+        let likes = localStorage.getItem(photoId + "_likes") || 0;
+        likeCount.textContent = likes;
 
-next.addEventListener("click", () => {
-    index = (index + 1) % slide.length;
-    updateSlider();
-});
+        likeBtn.addEventListener("click", () => {
+            likes++;
+            likeCount.textContent = likes;
+            localStorage.setItem(photoId + "_likes", likes);
+        });
 
-prev.addEventListener("click", () => {
-    index = (index - 1 + slide.length) % slide.length;
-    updateSlider();
-});
+        /* ===== COMMENTAIRES ===== */
+        let comments = JSON.parse(localStorage.getItem(photoId + "_comments")) || [];
 
+        function renderComments() {
+            commentList.innerHTML = "";
+            comments.forEach(c => {
+                const li = document.createElement("li");
+                li.textContent = c;
+                commentList.appendChild(li);
+            });
+        }
 
+        renderComments();
 
-/* Swipe mobile */
-slides.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-});
+        commentBtn.addEventListener("click", () => {
+            const text = commentInput.value.trim();
+            if (text !== "") {
+                comments.push(text);
+                localStorage.setItem(photoId + "_comments", JSON.stringify(comments));
+                commentInput.value = "";
+                renderComments();
+            }
+        });
+    });
 
-slides.addEventListener("touchend", e => {
-    const endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) next.click();
-    if (endX - startX > 50) prev.click();
 });
