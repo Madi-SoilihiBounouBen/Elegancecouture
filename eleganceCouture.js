@@ -91,15 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const commentBtn = card.querySelector(".comment-btn");
         const commentList = card.querySelector(".comment-list");
 
-        /* ===== LIKES ===== */
-        let likes = localStorage.getItem(photoId + "_likes") || 0;
-        likeCount.textContent = likes;
-
-        likeBtn.addEventListener("click", () => {
-            likes++;
-            likeCount.textContent = likes;
-            localStorage.setItem(photoId + "_likes", likes);
-        });
+    
 
         /* ===== COMMENTAIRES ===== */
         let comments = JSON.parse(localStorage.getItem(photoId + "_comments")) || [];
@@ -127,3 +119,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+

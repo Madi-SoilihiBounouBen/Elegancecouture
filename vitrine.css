@@ -1,0 +1,168 @@
+/* RESET GLOBAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+nav {
+  width: 100%;
+  padding: 30px 20px;
+  text-align: center;
+  z-index: 1000;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px 24px;
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  perspective: 1200px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+  position: relative;
+}
+
+.carousel-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#ring {
+  transform-style: preserve-3d;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  transition: transform 0.1s ease-out;
+}
+
+#ring:active {
+  cursor: grabbing;
+}
+
+.img {
+  position: absolute;
+  width: 280px;
+  height: 380px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  left: 50%;
+  top: 50%;
+  margin-left: -140px;
+  margin-top: -190px;
+}
+
+.img:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.6);
+  z-index: 100;
+}
+
+#pleinEcran {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+}
+
+#pleinEcran.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#pleinEcranImg {
+  width: 90vw;
+  height: 90vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: zoom-out;
+  animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.controls {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 100;
+}
+
+.controls button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 18px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.controls button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.controls button:active {
+  transform: translateY(-1px);
+}
