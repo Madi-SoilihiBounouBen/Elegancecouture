@@ -12,12 +12,24 @@ const nextBtn = document.getElementById('nextBtn');
    VARIABLES
 ======================= */
 const imgCount = images.length;
-const spacing = 350; // Espacement entre les images
 let currentIndex = 0;
 let rotation = 0;
 let isDragging = false;
 let startX = 0;
 let currentRotation = 0;
+
+// Espacement responsive
+function getSpacing() {
+  return window.innerWidth <= 768 ? 150 : 350;
+}
+
+let spacing = getSpacing();
+
+// Recalculer l'espacement au redimensionnement
+window.addEventListener('resize', () => {
+  spacing = getSpacing();
+  updateCarousel();
+});
 
 /* =======================
    POSITIONNEMENT HORIZONTAL AVEC PERSPECTIVE
@@ -122,15 +134,19 @@ ring.addEventListener('touchmove', (e) => {
 // Ouverture
 images.forEach(img => {
   img.addEventListener('click', () => {
-    const bg = getComputedStyle(img).backgroundImage;
-    pleinEcranImg.style.backgroundImage = bg;
+    const bg = window.getComputedStyle(img).backgroundImage;
+    // Nettoyer l'URL : enlever url() et les guillemets
+    const cleanUrl = bg.replace(/url\(['"]?([^'")]+)['"]?\)/g, '$1');
+    pleinEcranImg.style.backgroundImage = `url('${cleanUrl}')`;
     pleinEcran.classList.add('active');
   });
 });
 
 // Fermeture au clic
-pleinEcran.addEventListener('click', () => {
-  pleinEcran.classList.remove('active');
+pleinEcran.addEventListener('click', (e) => {
+  if (e.target === pleinEcran) {
+    pleinEcran.classList.remove('active');
+  }
 });
 
 /* =======================
@@ -154,4 +170,3 @@ window.addEventListener('keydown', (e) => {
     updateCarousel();
   }
 });
-

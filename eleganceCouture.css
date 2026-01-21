@@ -12,7 +12,7 @@
 ========================= */
 body {
     font-family: Arial, sans-serif; /* Police principale */
-    background-color: #f7f4f2;      /* Couleur de fond claire */
+    background-color: #f4f2f7;      /* Couleur de fond claire */
     color: #333;      /* Couleur du texte principale */
     line-height: 1.6;  /* Hauteur de ligne pour lisibilité */
     margin: 0;
@@ -24,7 +24,7 @@ body {
    HEADER
 ========================= */
 header {
-    background-color: #c8c57b; /* Couleur de fond du header */
+    background-color: #000000; /* Couleur de fond du header */
     padding: 30px 20px;    /* Espace intérieur autour du texte */
     text-align: center;    /* Centrer le texte */
     color: white;    /* Texte en blanc */
@@ -37,14 +37,14 @@ nav {
     display: flex;                    /* Utilise Flexbox pour aligner les liens */
     justify-content: center;          /* Centrer horizontalement les liens */
     gap: 30px;                        /* Espacement entre les liens */
-    background-color: #e8d6c7;       /* Couleur de fond de la barre de navigation */
+    background-color: #411fd6;       /* Couleur de fond de la barre de navigation */
     padding: 15px 0;                  /* Espace vertical autour des liens */
 }
 
 nav a {
     position: relative;               /* Nécessaire pour le pseudo-élément ::after */
     text-decoration: none;            /* Supprime le soulignement */
-    color: #333;                      /* Couleur du texte */
+    color: #ffffff;                      /* Couleur du texte */
     font-weight: bold;                /* Texte en gras */
 }
 
