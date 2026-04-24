@@ -1,106 +1,106 @@
-/* Réinitialisation des marges et paddings par défaut du navigateur */
+:root {
+    --text: #fff8f1;
+    --muted: rgba(255, 248, 241, 0.78);
+    --line: rgba(255, 255, 255, 0.2);
+    --accent: #f1c27a;
+    --accent-dark: #6e3a26;
+}
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
-/* Configuration globale pour occuper toute la fenêtre */
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    /* Supprime les espaces par défaut */
-}
-
-/* Style du corps de la page */
 body {
-    background-image: url("/assets/images/Logo%20b.png");
-    /* Image de fond de la page */
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--text);
+    background:
+        linear-gradient(rgba(30, 15, 10, 0.45), rgba(30, 15, 10, 0.72)),
+        url("/assets/images/img%20accueil.png") center / cover no-repeat;
+}
 
-    background-repeat: no-repeat;
-    /* Empêche la répétition de l’image */
+.landing {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+}
 
-    background-position: center;
-    /* Centre l’image */
+.landing-card {
+    width: min(720px, 100%);
+    padding: clamp(1.5rem, 5vw, 3rem);
+    border-radius: 28px;
+    border: 1px solid var(--line);
+    background: rgba(49, 24, 17, 0.42);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 24px 60px rgba(12, 6, 4, 0.28);
+    text-align: center;
+}
 
-    background-size: cover;
-    /* L’image couvre tout l’écran */
+.eyebrow {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    color: var(--muted);
+}
 
+h1 {
+    margin: 0.75rem 0 0;
+    font-size: clamp(2.2rem, 8vw, 4.6rem);
+    line-height: 1.05;
+}
+
+.intro {
+    margin: 1rem auto 0;
+    max-width: 48ch;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--muted);
+}
+
+.landing-actions {
     display: flex;
-    /* Active le système Flexbox */
-
     justify-content: center;
-    /* Centre le contenu horizontalement */
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2rem;
+}
 
+.btn {
+    display: inline-flex;
     align-items: center;
-    /* Centre le contenu verticalement */
-
-    height: 100vh;
-    /* Force la hauteur de la page à la hauteur de l’écran */
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.9rem 1.25rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-
-section {
-    background-color: transparent;
-    /* Fond transparent */
-
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    /* Bordure blanche semi-transparente */
-
-    backdrop-filter: blur(20px);
-    /* Effet de flou sur l’arrière-plan (effet verre) */
-
-    padding: 20px;
-    /* Espacement intérieur */
-
-    width: 600px;
-
-    border-radius: 20px;
-    /* Coins arrondis */
+.btn:hover,
+.btn:focus-visible {
+    transform: translateY(-2px);
 }
 
-/* Titre principal */
-section h1 {
-    font-size: 30px;
-    /* Taille du texte */
-
-    text-align: center;
-    /* Centre le texte */
-
-    color: #fff;
-    /* Texte blanc */
-
-    margin-bottom: 20px;
-    /* Espacement sous le titre */
+.btn-primary {
+    background: var(--accent);
+    color: var(--accent-dark);
 }
 
-/* Paragraphes */
-section p {
-    text-align: center;
-    /* Centre le texte */
-
-    color: #fff;
-    /* Texte blanc */
-
-    margin-bottom: 20px;
-    /* Espacement sous le paragraphe */
+.btn-secondary {
+    color: var(--text);
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.08);
 }
 
-/* Liens */
-a {
-    color: aqua;
-    /* Couleur des liens */
-}
+@media (max-width: 560px) {
+    .landing-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
 
-a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0%;
-    height: 3px;
-    background-color: #a2fc07;
-    transition: width 0.5s ease;
+    .btn {
+        width: 100%;
+    }
 }

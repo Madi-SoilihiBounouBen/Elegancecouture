@@ -1,23 +1,27 @@
-const express = require("express");
-const path = require("path");
+// Le fichier server.js a pour mission de creer le serveur de l'application
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+// J'importe le package HTTP
+const http = require("http");
 
-app.use(express.static(path.join(__dirname, "public")));
+// J'importe l'application app.js
+const app = require("./app");
 
-app.get("/", (_req, res) => {
-    res.sendFile(path.join(__dirname, "views", "eleganceCouture.html"));
+// Je cree un serveur
+const serveur = http.createServer(app);
+
+let numeroPort = Number(process.env.PORT) || 3010;
+
+serveur.on("error", (erreur) => {
+    if (erreur.code === "EADDRINUSE") {
+        console.error(`Le port ${numeroPort} est deja utilise. Tentative sur le port ${numeroPort + 1}...`);
+        numeroPort += 1;
+        serveur.listen(numeroPort);
+        return;
+    }
+
+    console.error("Erreur du serveur :", erreur);
 });
 
-app.get("/accueil", (_req, res) => {
-    res.sendFile(path.join(__dirname, "views", "accueil.html"));
-});
-
-app.get("/vitrine", (_req, res) => {
-    res.sendFile(path.join(__dirname, "views", "vitrine.html"));
-});
-
-app.listen(PORT, () => {
-    console.log(`Elegance Couture disponible sur http://localhost:${PORT}`);
+serveur.listen(numeroPort, () => {
+    console.log(`Le serveur est a l'ecoute sur le port ${numeroPort}`);
 });

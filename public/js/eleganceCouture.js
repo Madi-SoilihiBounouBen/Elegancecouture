@@ -1,122 +1,132 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-    /* ===== AUTO MESSAGE CONTACT ===== */
     const messageField = document.querySelector('textarea[name="message"]');
+    const serviceButtons = document.querySelectorAll(".btn[data-type]");
 
-    document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            if (btn.dataset.type && messageField) {
-                messageField.value = `Bonjour,\nJe souhaite une ${btn.dataset.type}.`;
+    serviceButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (!messageField) {
+                return;
             }
+
+            messageField.value = `Bonjour,\nJe souhaite des informations pour une ${button.dataset.type}.`;
         });
     });
 
-    /* ===== SLIDER ===== */
     const slides = document.querySelector(".slides");
-    const slide = document.querySelectorAll(".slide");
-    const prev = document.querySelector(".prev");
-    const next = document.querySelector(".next");
+    const slideItems = Array.from(document.querySelectorAll(".slide"));
+    const prevButton = document.querySelector(".prev");
+    const nextButton = document.querySelector(".next");
     const dotsContainer = document.querySelector(".dots");
+    let currentIndex = 0;
 
-    let index = 0;
+    if (slides && slideItems.length > 0 && dotsContainer) {
+        slideItems.forEach((_, index) => {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = "dot";
+            dot.setAttribute("aria-label", `Aller a la creation ${index + 1}`);
+            if (index === 0) {
+                dot.classList.add("active");
+            }
 
-    slide.forEach((_, i) => {
-        const dot = document.createElement("span");
-        dot.className = "dot";
-        if (i === 0) dot.classList.add("active");
-        dot.onclick = () => goToSlide(i);
-        dotsContainer.appendChild(dot);
-    });
+            dot.addEventListener("click", () => {
+                currentIndex = index;
+                updateSlider();
+            });
 
-    const dots = document.querySelectorAll(".dot");
-
-    function updateSlider() {
-        slides.style.transform = `translateX(${-index * 100}%)`;
-        dots.forEach(d => d.classList.remove("active"));
-        dots[index].classList.add("active");
-    }
-
-    function goToSlide(i) {
-        index = i;
-        updateSlider();
-    }
-
-    next.onclick = () => {
-        index = (index + 1) % slide.length;
-        updateSlider();
-    };
-
-    prev.onclick = () => {
-        index = (index - 1 + slide.length) % slide.length;
-        updateSlider();
-    };
-
-    /* ===== LIGHTBOX ===== */
-    const images = document.querySelectorAll(
-        ".apercu img, .slide img, .galerie img"
-    );
-
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    const caption = document.getElementById("caption");
-    const close = document.querySelector(".close");
-
-    images.forEach(img => {
-        img.addEventListener("click", () => {
-            lightbox.style.display = "flex";
-            lightboxImg.src = img.src;
-            caption.textContent = img.alt;
+            dotsContainer.appendChild(dot);
         });
-    });
 
-    close.onclick = () => lightbox.style.display = "none";
+        const dots = Array.from(dotsContainer.querySelectorAll(".dot"));
 
-    lightbox.onclick = e => {
-        if (e.target === lightbox) {
-            lightbox.style.display = "none";
-        }
-    };
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    document.querySelectorAll(".photo-card").forEach(card => {
-        const photoId = card.dataset.id;
-
-        const likeBtn = card.querySelector(".like-btn");
-        const likeCount = card.querySelector(".like-count");
-
-        const commentInput = card.querySelector(".comment-input");
-        const commentBtn = card.querySelector(".comment-btn");
-        const commentList = card.querySelector(".comment-list");
-
-    
-
-        /* ===== COMMENTAIRES ===== */
-        let comments = JSON.parse(localStorage.getItem(photoId + "_comments")) || [];
-
-        function renderComments() {
-            commentList.innerHTML = "";
-            comments.forEach(c => {
-                const li = document.createElement("li");
-                li.textContent = c;
-                commentList.appendChild(li);
+        function updateSlider() {
+            slides.style.transform = `translateX(${-currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle("active", index === currentIndex);
             });
         }
 
-        renderComments();
+        nextButton?.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % slideItems.length;
+            updateSlider();
+        });
 
-        commentBtn.addEventListener("click", () => {
-            const text = commentInput.value.trim();
-            if (text !== "") {
-                comments.push(text);
-                localStorage.setItem(photoId + "_comments", JSON.stringify(comments));
-                commentInput.value = "";
-                renderComments();
+        prevButton?.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + slideItems.length) % slideItems.length;
+            updateSlider();
+        });
+    }
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightbox-img");
+    const caption = document.getElementById("caption");
+    const closeButton = document.querySelector(".close");
+    const galleryImages = document.querySelectorAll(".apercu img, .slide img, .photo-card img");
+
+    galleryImages.forEach((image) => {
+        image.addEventListener("click", () => {
+            if (!lightbox || !lightboxImage || !caption) {
+                return;
             }
+
+            lightbox.style.display = "flex";
+            lightbox.setAttribute("aria-hidden", "false");
+            lightboxImage.src = image.src;
+            lightboxImage.alt = image.alt;
+            caption.textContent = image.alt;
         });
     });
 
-});
+    closeButton?.addEventListener("click", () => {
+        if (!lightbox) {
+            return;
+        }
 
+        lightbox.style.display = "none";
+        lightbox.setAttribute("aria-hidden", "true");
+    });
+
+    lightbox?.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+            lightbox.style.display = "none";
+            lightbox.setAttribute("aria-hidden", "true");
+        }
+    });
+
+    document.querySelectorAll(".photo-card").forEach((card) => {
+        const photoId = card.dataset.id;
+        const commentInput = card.querySelector(".comment-input");
+        const commentButton = card.querySelector(".comment-btn");
+        const commentList = card.querySelector(".comment-list");
+
+        if (!photoId || !commentInput || !commentButton || !commentList) {
+            return;
+        }
+
+        let comments = JSON.parse(localStorage.getItem(`${photoId}_comments`) || "[]");
+
+        const renderComments = () => {
+            commentList.innerHTML = "";
+
+            comments.forEach((comment) => {
+                const item = document.createElement("li");
+                item.textContent = comment;
+                commentList.appendChild(item);
+            });
+        };
+
+        renderComments();
+
+        commentButton.addEventListener("click", () => {
+            const value = commentInput.value.trim();
+            if (!value) {
+                return;
+            }
+
+            comments.push(value);
+            localStorage.setItem(`${photoId}_comments`, JSON.stringify(comments));
+            commentInput.value = "";
+            renderComments();
+        });
+    });
+});

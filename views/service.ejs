@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service - Elegance Couture</title>
+    <link rel="stylesheet" href="/css/eleganceCouture.css">
+    <script src="/js/eleganceCouture.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/" class="brand">
+                <span class="brand-mark">EC</span>
+                <span class="brand-text">
+                    <strong>Elegance Couture</strong>
+                    <small>Creations sur mesure et retouches</small>
+                </span>
+            </a>
+
+            <nav class="main-nav" aria-label="Navigation principale">
+                <a href="/accueil">Accueil</a>
+                <a href="/service#about">A propos</a>
+                <a href="/service#services">Services</a>
+                <a href="/service#contact">Contact</a>
+                <a href="/vitrine">Vitrine</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Service</p>
+                    <h1>Tout l'univers de l'atelier sur une seule page.</h1>
+                    <p class="hero-text">
+                        Retrouvez ici la presentation de l'atelier, les prestations proposees
+                        et les informations de contact pour preparer votre projet couture.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#services" class="btn btn-primary">Voir les services</a>
+                        <a href="#contact" class="btn btn-secondary">Nous contacter</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <img src="/assets/images/tenue%20bleue.jpg" alt="Creation Elegance Couture">
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container split-section">
+                <div>
+                    <p class="eyebrow">A propos</p>
+                    <h2>Un atelier qui travaille le detail, la coupe et l'allure.</h2>
+                </div>
+
+                <div class="surface">
+                    <p>
+                        Elegance Couture accompagne les clientes qui recherchent une tenue
+                        unique, une retouche fiable ou un regard expert sur leur style.
+                        Chaque projet est pense pour respecter votre morphologie, votre confort
+                        et l'esprit de l'evenement.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Services</p>
+                        <h2>Des prestations claires selon votre besoin</h2>
+                    </div>
+                </div>
+
+                <div class="services">
+                    <article class="card">
+                        <h3>Creation sur mesure</h3>
+                        <p>Realisation de vetements uniques adaptes a vos envies, vos mesures et votre occasion.</p>
+                        <a href="#contact" class="btn btn-primary" data-type="creation sur mesure">Demander une creation</a>
+                    </article>
+
+                    <article class="card">
+                        <h3>Retouches</h3>
+                        <p>Ajustement de longueur, reprise de coupe et finitions pour un rendu plus net et confortable.</p>
+                        <a href="#contact" class="btn btn-primary" data-type="retouche">Demander une retouche</a>
+                    </article>
+
+                    <article class="card">
+                        <h3>Conseil style</h3>
+                        <p>Orientation sur le choix de coupe, de coloris et de tenue selon votre morphologie et votre evenement.</p>
+                        <a href="#contact" class="btn btn-primary" data-type="conseil style">Demander un conseil</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container contact-layout">
+                <div class="contact-copy">
+                    <p class="eyebrow">Contact</p>
+                    <h2>Parlons de votre projet.</h2>
+                    <p>
+                        Decrivez la tenue souhaitee, la retouche a faire ou la date de votre evenement.
+                        Vous pouvez aussi nous joindre par telephone.
+                    </p>
+
+                    <div class="contact-card">
+                        <p><strong>Telephone</strong><br>0639 29 93 22</p>
+                        <p><strong>Adresse</strong><br>129 rue Souweri, 97630 Acoua, Mayotte</p>
+                        <p><strong>Facebook</strong><br><a href="https://www.facebook.com/Fatima.EleganceCouture/" target="_blank" rel="noreferrer">Fatima Elegance Couture</a></p>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <label>
+                        Nom
+                        <input type="text" name="nom" required>
+                    </label>
+
+                    <label>
+                        Email
+                        <input type="email" name="email" required>
+                    </label>
+
+                    <label>
+                        Message
+                        <textarea name="message" rows="6" required></textarea>
+                    </label>
+
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>Elegance Couture</p>
+            <p>Creations sur mesure, retouches et conseil style</p>
+        </div>
+    </footer>
+</body>
+</html>
