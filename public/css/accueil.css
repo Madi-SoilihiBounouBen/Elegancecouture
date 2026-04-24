@@ -16,7 +16,7 @@ html, body {
 
 /* Style du corps de la page */
 body {
-    background-image: url("Logo b.png");
+    background-image: url("/assets/images/Logo%20b.png");
     /* Image de fond de la page */
 
     background-repeat: no-repeat;

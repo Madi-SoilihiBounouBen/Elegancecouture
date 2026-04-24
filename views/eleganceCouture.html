@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance Couture</title>
+    <link rel="stylesheet" href="/css/eleganceCouture.css">
+    <script src="/js/eleganceCouture.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Elegance Couture</h1>
+        <p>Creations sur mesure • Retouches • Style mariage</p>
+    </header>
+
+    <nav>
+        <a href="/accueil">Accueil</a>
+        <a href="#about">A propos</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a href="https://www.facebook.com/Fatima.EleganceCouture/" target="_blank" rel="noreferrer">Facebook</a>
+        <a href="/vitrine">Vitrine photo</a>
+    </nav>
+
+    <section class="hero">
+        <h2>Bienvenue chez Elegance Couture</h2>
+        <p>Votre atelier de couture ou chaque detail compte.</p>
+    </section>
+
+    <section id="about" class="section">
+        <h2>A propos</h2>
+        <p>
+            Elegance Couture est un atelier de couture specialise dans les creations personnalisees,
+            les retouches fines et les modeles uniques realises avec passion par Mari Fatima.
+            Nous mettons en valeur votre style grace a un savoir-faire sur mesure.
+        </p>
+    </section>
+
+    <a href="#galerie" class="apercu-link">
+        <section id="apercu" class="apercu">
+            <img src="/assets/images/tenue%20bleue.jpg" alt="Creation Elegance Couture">
+            <div class="apercu-text">
+                <h2>Decouvrir nos creations</h2>
+                <p>Cliquez pour voir toutes nos realisations</p>
+            </div>
+        </section>
+    </a>
+
+    <section id="galerie" class="section">
+        <h2>Nos creations</h2>
+
+        <div class="slider">
+            <div class="slides">
+                <div class="slide active">
+                    <img src="/assets/images/marron5.png" alt="Robe sur mesure">
+                    <div class="caption">
+                        <h3>Robe sur mesure</h3>
+                        <p>Elegance et raffinement</p>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="/assets/images/marron4.png" alt="Tenue elegante">
+                    <div class="caption">
+                        <h3>Tenue elegante</h3>
+                        <p>Creation artisanale unique</p>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="/assets/images/marron6.png" alt="Creation couture">
+                    <div class="caption">
+                        <h3>Creation couture</h3>
+                        <p>Savoir-faire sur mesure</p>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="/assets/images/dor%C3%A9.png" alt="Creation couture doree">
+                    <div class="caption">
+                        <h3>Creation couture</h3>
+                        <p>Savoir-faire sur mesure</p>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="/assets/images/img1.png" alt="Creation couture">
+                    <div class="caption">
+                        <h3>Creation couture</h3>
+                        <p>Savoir-faire sur mesure</p>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="/assets/images/img2.png" alt="Creation couture">
+                    <div class="caption">
+                        <h3>Creation couture</h3>
+                        <p>Savoir-faire sur mesure</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="prev" type="button">❮</button>
+            <button class="next" type="button">❯</button>
+            <div class="dots"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Galerie photo</h2>
+        <div class="galerie">
+            <div class="photo-card" data-id="photo1">
+                <img src="/assets/images/tenue%20bleur/bleu.png" alt="Tenue bleue">
+                <div class="comments">
+                    <input type="text" placeholder="Ajouter un commentaire..." class="comment-input">
+                    <button class="comment-btn" type="button">Envoyer</button>
+                    <ul class="comment-list"></ul>
+                </div>
+            </div>
+
+            <div class="photo-card" data-id="photo2">
+                <img src="/assets/images/tenue%20bleur/bleu2.png" alt="Tenue bleue">
+                <div class="comments">
+                    <input type="text" placeholder="Ajouter un commentaire..." class="comment-input">
+                    <button class="comment-btn" type="button">Envoyer</button>
+                    <ul class="comment-list"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <h2>Nos Services</h2>
+        <div class="services">
+            <div class="card">
+                <h3>Creation sur mesure</h3>
+                <p>Realisation de vetements uniques adaptes a votre style et a vos mesures.</p>
+                <a href="#contact" class="btn" data-type="creation">Demander une creation</a>
+            </div>
+
+            <div class="card">
+                <h3>Retouches</h3>
+                <p>Ajustements de vetements pour un tombe parfait.</p>
+                <a href="#contact" class="btn" data-type="retouche">Demander une retouche</a>
+            </div>
+
+            <div class="card">
+                <h3>Conseil style</h3>
+                <p>Accompagnement personnalise pour valoriser votre silhouette.</p>
+                <a href="#contact" class="btn" data-type="conseil en style">Demander un conseil</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Contact</h2>
+        <p>Pour toute demande :</p>
+
+        <form class="contact-form">
+            <label>
+                Nom
+                <input type="text" name="nom" required>
+            </label>
+
+            <label>
+                Email
+                <input type="email" name="email" required>
+            </label>
+
+            <label>
+                Message
+                <textarea name="message" rows="5" required></textarea>
+            </label>
+
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>Elegance Couture</p>
+        <p>Tel : 0639 29 93 22</p>
+        <p>129 rue Souweri, 97630 Acoua, Mayotte</p>
+    </footer>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="">
+        <div id="caption"></div>
+    </div>
+</body>
+</html>

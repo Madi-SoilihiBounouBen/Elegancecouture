@@ -6,7 +6,7 @@
 }
 
 body {
-  background-image: url(boungouDjabali.jpg);
+  background-image: url("/assets/images/boungouDjabali.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
